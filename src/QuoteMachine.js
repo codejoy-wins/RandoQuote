@@ -22,7 +22,7 @@ class QuoteMachine extends Component {
           if(data[0].content && data[0].title && data[0].link){ //if quote set hasquote true
             let { quote } = this.state;
             console.log(data[0]);
-            quote.content = data[0].content;
+            quote.content = data[0].content;  // setting state
             quote.title = data[0].title;
             quote.link = data[0].link;
 
@@ -38,9 +38,19 @@ class QuoteMachine extends Component {
         })
     }
 
+    renderQuote = () => {
+      const { title, content, link } = this.state.quote;
+      return (
+        <a href={link}>
+          <h1>{title}</h1>
+          <h2>{content}</h2>
+        </a>
+      )
+    }
+
   render() {
       console.log(this.state);
-      const { hasQuote, quote } = this.state;
+      const { hasQuote } = this.state;
     return (
       <Fragment>
         <h1>Quote Machina</h1>
@@ -48,7 +58,7 @@ class QuoteMachine extends Component {
             Click me to get a random quote
         </button>
         <br />
-        {hasQuote === true ? JSON.stringify(quote) : 'no quote yet'}
+        {hasQuote === true ? this.renderQuote() : 'no quote yet'}
       </Fragment>
     )
   }

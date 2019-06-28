@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react'
+import './App.css';
+
 
 class QuoteMachine extends Component {
 
@@ -38,12 +40,19 @@ class QuoteMachine extends Component {
         })
     }
 
+
     renderQuote = () => {
       const { title, content, link } = this.state.quote;
+      function createMarkup(){
+          console.log({content});
+          console.log(content);
+
+          return {__html: content}
+      }
       return (
         <a href={link}>
           <h1>{title}</h1>
-          <h2>{content}</h2>
+          <h2 dangerouslySetInnerHTML={createMarkup()}></h2>
         </a>
       )
     }
@@ -54,7 +63,7 @@ class QuoteMachine extends Component {
     return (
       <Fragment>
         <h1>Quote Machina</h1>
-        <button onClick={this.getRando}>
+        <button onClick={this.getRando} id="btn">
             Click me to get a random quote
         </button>
         <br />
